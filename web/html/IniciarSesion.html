@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Iniciar Sesión</title>
+</head>
+<header>
+<div class="navbar">
+    <div class="navbar-logo">
+        <img src="../css/img/logo.png" alt="Logo de Natación">
+    </div>
+    <div class="navbar-links">
+        <ul>
+            <li><a href="index.html">Calendario</a></li>
+            <li><a href="">Competiciones</a></li>
+            <li><a href="ranking.html">Ranking</a></li>
+            <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+            <li><a href="IniciarSesion.html">Iniciar Sesión</a></li>
+            <li><a href="">Registrarse</a></li>
+        </ul>
+    </div>
+</div>
+</header>
+<body>
+    
+
+    <div class="login-container">
+        <h1>Iniciar Sesión</h1>
+        <form action="procesar_login.php" method="post">
+            <label for="usuario">Usuario:</label>
+            <input type="text" id="usuario" name="usuario" required>
+
+            <label for="contrasena">Contraseña:</label>
+            <input type="password" id="contrasena" name="contrasena" required>
+
+            <button type="submit">Iniciar Sesión</button>
+        </form>
+    </div>
+
+    
+</body>
+<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; 2023 Web de Natación</p>
+        <ul>
+            <li><a href="#">Términos y Condiciones</a></li>
+            <li><a href="#">Política de Privacidad</a></li>
+        </ul>
+    </div>
+</footer>
+</html>
