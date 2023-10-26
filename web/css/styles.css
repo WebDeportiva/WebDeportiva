@@ -117,3 +117,26 @@ h1 {
     font-size: 16px;
     line-height: 1.5;
 }
+
+
+/*PAGIAN DE COMPETICIONES:*/
+
+.banner{
+    background-color: rgb(71, 211, 246);
+
+}
+.banner h1{ 
+    margin-top: 140px;
+    text-align: start;
+    font-size: xx-large;
+}
+.banner p{ 
+    margin-left: 40px;
+    text-align: start;
+    font-size: x-large;
+}
+.competiciones table, th, td{
+    border: 2px solid black;
+    padding: 10px;
+    text-align: center;
+}
