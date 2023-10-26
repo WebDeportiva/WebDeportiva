@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styles.css">
+    <title>Web de Natacion</title>
+    
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-logo">
+          <a href="index.html"><img src="../css/img/logo.png" alt="Logo de Natacion"></a>
+        </div>
+        <div class="navbar-links">
+            <ul>
+                <li><a href="#Calendario">Calendario</a></li>
+                <li><a href="">Competiciones</a></li>
+                <li><a href="ranking.html">Ranking</a></li>
+                <li><a href="sobre-nosotros.html">Sobre Nosotros</a></li>
+                <li><a href="IniciarSesion.html">Iniciar Sesión</a></li>
+                <li><a href="">Registrarse</a></li>
+            </ul>
+        </div>
+    </div>
+  
+   <!---- obtener ranking --->
+ 
+     <form action="index.php" method="post">
+       <h1>Consulta de marcas</h1>
+       <div class="campos">
+         <label for="tipo">Tipo</label>
+         <select name="tipo" id="tipo">
+           <option value="ranking">Ranking</option>
+           <option value="records">Récords</option>
+         </select>
+         <label for="estilo">Estilo</label>
+         <select name="estilo" id="estilo">
+           <option value="libre">Libre</option>
+           <option value="mariposa">Mariposa</option>
+           <option value="espalda">Espalda</option>
+           <option value="braza">Brazada</option>
+         </select>
+         <label for="tipo_prueba">Tipo de prueba</label>
+         <select name="tipo_prueba" id="tipo_prueba">
+           <option value="100m">100m</option>
+           <option value="200m">200m</option>
+           <option value="400m">400m</option>
+           <option value="800m">800m</option>
+           <option value="1500m">1500m</option>
+         </select>
+         <label for="deportista">Deportista/Master</label>
+         <select name="deportista" id="deportista">
+           <option value="todos">Todos</option>
+           <option value="master">Master</option>
+         </select>
+         <label for="piscina">Piscina</label>
+         <input type="text" name="piscina" id="piscina" placeholder="Nombre de la piscina">
+         <label for="temporada">Temporada</label>
+         <input type="text" name="temporada" id="temporada" placeholder="Año">
+         <label for="cronometro">Cronómetro</label>
+         <input type="text" name="cronometro" id="cronometro" placeholder="Marca del cronómetro">
+         <label for="genero">Género</label>
+         <select name="genero" id="genero">
+           <option value="todos">Todos</option>
+           <option value="masculino">Masculino</option>
+           <option value="femenino">Femenino</option>
+         </select>
+         <label for="resultados">Resultados a mostrar</label>
+         <input type="number" name="resultados" id="resultados" placeholder="Número de resultados">
+         <label for="marca">Marca</label>
+         <input type="text" name="marca" id="marca" placeholder="Marca a consultar">
+       </div>
+       <button type="submit">Consultar</button>
+     </form>
+  
+
+
+
+
+
+
+
+
+
+
+     <!----- foother  ----->
+     <footer class="footer">
+      <div class="footer-content">
+          <p>&copy; 2023 Web de Natación</p>
+          <ul>
+              <li><a href="#">Términos y Condiciones</a></li>
+              <li><a href="#">Política de Privacidad</a></li>
+          </ul>
+      </div>
+  </footer>
+    
+  
+
+</body>
+</html>
