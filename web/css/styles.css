@@ -118,8 +118,7 @@ h1 {
     line-height: 1.5;
 }
 
-
-/*PAGIAN DE COMPETICIONES:*/
+/*PAGINA DE COMPETICIONES:*/
 
 .banner{
     background-color: rgb(71, 211, 246);
@@ -135,6 +134,12 @@ h1 {
     text-align: start;
     font-size: x-large;
 }
+.competiciones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .competiciones table, th, td{
     border: 2px solid black;
     padding: 10px;
