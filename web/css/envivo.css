@@ -1,0 +1,60 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.evento {
+    text-align: center;
+    padding: 20px;
+}
+
+.titulo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.piscina {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+
+.piscina {
+    position: relative;
+    width: 800px;
+    height: 400px;
+    margin: auto;
+    background-image: url('piscina.png');
+    background-size: cover;
+    margin-top: 20px; /* Espacio entre la prueba y la piscina */
+}
+.calle {
+    width: 100px;
+    height: 300px;
+    border: 1px solid #ccc;
+    text-align: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    margin: 0 5px;
+}
+
+.parciales {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    font-size: 18px;
+    margin: 5px 0;
+}
+.tiempo-final {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
