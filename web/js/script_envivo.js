@@ -30,16 +30,16 @@ document.addEventListener('DOMContentLoaded', function() {
             {
                 prueba: 'Prueba 100m Espalda',
                 parciales: [
-                    'Nadador 1: 35s',
-                    'Nadador 2: 36s',
-                    'Nadador 3: 33s',
-                    'Nadador 4: 34s',
-                    'Nadador 5: 32s',
-                    'Nadador 6: 31s',
-                    'Nadador 7: 37s',
-                    'Nadador 8: 35s'
+                    'Nadador 1: 31s',
+                    'Nadador 2: 30s',
+                    'Nadador 3: 29s',
+                    'Nadador 4: 27s',
+                    'Nadador 5: 27s',
+                    'Nadador 6: 29s',
+                    'Nadador 7: 30s',
+                    'Nadador 8: 29s'
                 ],
-                tiempoFinal: 'Tiempo Final: 2m 45s'
+                tiempoFinal: 'Tiempo Final: 59s'
             },
             {
                 prueba: 'Prueba 100m Mariposa',
