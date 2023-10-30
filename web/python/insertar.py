@@ -1,8 +1,13 @@
+from urllib import request
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from conexion import connect_to_database
+from jinja2 import Environment, FileSystemLoader
 
+
+env = Environment(loader=FileSystemLoader('../html/templates'))
+app = env.get_template('crud.html')
 # Define la clase base para declarar modelos
 Base = declarative_base()
 
@@ -58,11 +63,12 @@ def get_data(engine):
     sesion.close()
 
 def insertar_valores():
-    dni = input('Inserta el DNI: ')
-    nombre = input('Inserta el Nombre: ')
-    apellido = input('Inserta el Apellido: ')
-    genero = input('Inserta el Genero: ')
-    return dni, nombre, apellido, genero
+    if request.method == ['POST']:
+        dni = request.form['dni']
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        genero = request.form['genero']
+        return dni, nombre, apellido, genero
 
 if __name__ == "__main__":
     # Conectar a la base de datos utilizando SQLAlchemy
