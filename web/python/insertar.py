@@ -26,7 +26,7 @@ try:
 
     # Obtener los resultados de la consulta
     registros = result.fetchall()
-
+    
     # Configurar el entorno Jinja2
     env = Environment(loader=FileSystemLoader('../html/template'))
     print(env.list_templates())
