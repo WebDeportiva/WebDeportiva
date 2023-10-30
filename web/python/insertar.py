@@ -26,16 +26,15 @@ try:
 
     # Obtener los resultados de la consulta
     registros = result.fetchall()
-
+    print(result)
     # Configurar el entorno Jinja2
-    env = Environment(loader=FileSystemLoader('../templates'))
-    
+    env = Environment(loader=FileSystemLoader('../html/templates'))
+    print(env.list_templates)
     # Cargar la plantilla HTML
-    template = env.get_template('index.html')
+    template = env.get_template('crud.html')
 
     # Renderizar la plantilla con los datos de la consulta
     html_output = template.render(registros=registros)
-
     # Cierra la sesión
     sesion.close()
 
