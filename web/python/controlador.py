@@ -22,7 +22,6 @@ db_cursor = db_connection.cursor()
 def app(environ, start_response):
     path = environ.get('PATH_INFO')
     template = env.get_template('index.html')
-    print(template.filename)
     if path == '/':
         return handle_crud(environ, start_response)
     else:
