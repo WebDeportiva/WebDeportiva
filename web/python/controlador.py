@@ -1,9 +1,10 @@
 from wsgiref.simple_server import make_server
 from jinja2 import Environment, FileSystemLoader
 import psycopg2
-from modelos import get_nadadores
+from modelos import get_nadadores 
 
-env = Environment(loader=FileSystemLoader('./templates'))
+
+env = Environment(loader=FileSystemLoader('web/python/templates'))
 template = env.get_template('index.html')
 
 
@@ -21,7 +22,7 @@ db_cursor = db_connection.cursor()
 # Define la función app que manejará las solicitudes.
 def app(environ, start_response):
     path = environ.get('PATH_INFO')
-    template = env.get_template('index.html')
+    template
     if path == '/':
         return handle_crud(environ, start_response)
     else:
@@ -35,13 +36,9 @@ def handle_crud(environ, start_response):
     # Realiza una consulta SQL para obtener información de la tabla 'nadadores'
     db_cursor.execute("SELECT * FROM nadadores")
     nadadores = db_cursor.fetchall()
-    
-    # Configura el entorno de Jinja2
-    env = Environment(loader=FileSystemLoader('templates'))
-    template = env.get_template('index.html')
-    
+
     # Renderiza la plantilla 'crud.html' con los datos de la tabla 'nadadores'
-    response = template.render(registros=registros).encode('utf-8')
+    response = template.render(nadadores=nadadores).encode('utf-8')
     
     status = '200 OK'
     response_headers = [('Content-type', 'text/html')]

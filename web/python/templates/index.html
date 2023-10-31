@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <h1>CRUD</h1>
     <table>
@@ -14,14 +16,15 @@
             <th>Nombre</th>
             <th>Apellido</th>
         </tr>
-        {% for registro in registros %}
+        {% for nadador in nadadores %}
         <tr>
-            <td>{{ registro.id }}</td>
-            <td>{{ registro.dni }}</td>
-            <td>{{ registro.nombre }}</td>
-            <td>{{ registro.apellido }}</td>
+            <td>{{ nadador.id }}</td>
+            <td>{{ nadador.dni }}</td>
+            <td>{{ nadador.nombre }}</td>
+            <td>{{ nadador.apellido }}</td>
         </tr>
     </table>
     {% endfor %}
 </body>
+
 </html>
