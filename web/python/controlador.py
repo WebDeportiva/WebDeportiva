@@ -4,6 +4,7 @@ import psycopg2
 from modelos import get_nadadores
 
 env = Environment(loader=FileSystemLoader('templates'))
+
 template = env.get_template('index.html')
 
 
