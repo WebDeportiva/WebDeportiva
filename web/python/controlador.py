@@ -38,7 +38,7 @@ def handle_crud(environ, start_response):
     nadadores = db_cursor.fetchall()
 
     # Renderiza la plantilla 'crud.html' con los datos de la tabla 'nadadores'
-    response = template.render(nadadores=nadadores).encode('utf-8')
+    response = template.render(registros=registros, nadadores=nadadores).encode('utf-8')
     
     status = '200 OK'
     response_headers = [('Content-type', 'text/html')]
@@ -56,7 +56,6 @@ def handle_404(environ, start_response):
 if __name__ == "__main__":
     host = 'localhost'
     port = 8000
-
     httpd = make_server(host, port, app)
     print(f"Servidor en http://{host}:{port}")
     httpd.serve_forever()
