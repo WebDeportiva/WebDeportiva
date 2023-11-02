@@ -1,7 +1,8 @@
 from wsgiref.simple_server import make_server
 from jinja2 import Environment, FileSystemLoader
-import psycopg2
+import os
 from modelos import get_nadadores, insert_nadador, parse_post_data, redirect_to_main, delete_nadador
+from views import serve_static
 
 
 env = Environment(loader=FileSystemLoader('web/python/templates'))
@@ -14,6 +15,8 @@ def app(environ, start_response):
     template
     if path == '/':
         return handle_crud(environ, start_response)
+    elif path.startswith('/static/'):
+        return serve_static(environ, start_response)
     else:
         return handle_404(environ, start_response)
 
