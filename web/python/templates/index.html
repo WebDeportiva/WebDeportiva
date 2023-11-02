@@ -1,30 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CRUD</title>
+        <script src="../static/script.js"></script>
 </head>
 
 <body>
     <h1>CRUD</h1>
+
+    <form method="post" action="/">
+        <input type="text" name="dni" placeholder="DNI" required>
+        <input type="text" name="nombre" placeholder="Nombre" required>
+        <input type="text" name="apellido" placeholder="Apellido" required>
+        <input type="text" name="genero" placeholder="Genero" required>
+        <button type="submit">Insertar</button>
+    </form>
+    
+
     <table>
         <tr>
             <th>ID</th>
             <th>DNI</th>
             <th>Nombre</th>
             <th>Apellido</th>
+            <th>Genero</th>
+            <th>Acciones</th>
         </tr>
-        {% for nadador in nadadores %}
+        {% for registro in registros %}
         <tr>
-            <td>{{ nadador.id }}</td>
-            <td>{{ nadador.dni }}</td>
-            <td>{{ nadador.nombre }}</td>
-            <td>{{ nadador.apellido }}</td>
+            <td>{{registro[0]}}</td>
+            <td>{{registro[1]}}</td>
+            <td>{{registro[2]}}</td>
+            <td>{{registro[3]}}</td>
+            <td>{{registro[4]}}</td>
+            <td>
+                <form method="post" action="/">
+                    <input type="hidden" name="id" value="{{registro[0]}}">
+                    <button type="submit">Borrar</button>
+                </form>
+                <button>Editar</button>
+            </td>
         </tr>
+        {% endfor %}
     </table>
-    {% endfor %}
 </body>
 
 </html>
