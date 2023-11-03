@@ -21,42 +21,64 @@ def handle_crud(environ, start_response, db_cursor):
     return [response]
 
 
-# Función para servir archivos estáticos
-def serve_static(environ, start_response):
-    static_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'static'))
-    path = environ['PATH_INFO']
+# # Función para servir archivos estáticos
+# def serve_static(environ, start_response):
+#     static_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'static'))
+#     path = environ['PATH_INFO']
 
-    if not path.startswith('./static'):
+#     if not path.startswith('/static'):
+#         start_response('404 Not Found', [('Content-type', 'text/plain')])
+#         return [b'Not Found']
+#     else:
+#         # Obtiene la extensión del archivo solicitado
+#         file_extension = os.path.splitext(path)
+#         print(file_extension)
+#         # Mapea extensiones a tipos MIME
+#         mime_types = {
+#             '.css': 'text/css',
+#             '.js': 'application/javascript',
+#         }
+
+#         # Determina el tipo MIME del archivo solicitado
+#         mime_type = mime_types.get(file_extension, 'application/octet-stream')
+
+#         # Construye la ruta completa del archivo
+#         file_path = os.path.join(static_dir, path)
+#         try:
+#             with open(file_path, 'rb') as file:
+#                 file_content = file.read()
+#                 start_response('200 OK', [('Content-type', mime_type)])
+#                 return [file_content]
+#         except FileNotFoundError:
+#             start_response('404 Not Found', [('Content-type', 'text/plain')])
+#             return [b'File Not Found']
+#         except Exception as e:
+#             start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
+#             return [str(e).encode('utf-8')]
+
+
+def serve_static(environ, start_response):
+    # static_dir = './static'  
+    static_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), 'static'))
+    print('static_dir', static_dir)
+    path = environ['PATH_INFO']
+    #css_path = 'e:/Proyectos_Python/Ej_mvc/static/style.css'
+    css_path = static_dir + '\script.js'
+    # print('css_path:', css_path)
+    # print('os.path', os.path)
+    if not path.startswith('/static/'):
         start_response('404 Not Found', [('Content-type', 'text/plain')])
         return [b'Not Found']
     else:
-        # Obtiene la extensión del archivo solicitado
-        _, file_extension = os.path.splitext(path)
-
-        # Mapea extensiones a tipos MIME
-        mime_types = {
-            '.css': 'text/css',
-            '.js': 'application/javascript',
-        }
-
-        # Determina el tipo MIME del archivo solicitado
-        mime_type = mime_types.get(file_extension, 'application/octet-stream')
-
-        # Construye la ruta completa del archivo
-        file_path = os.path.join(static_dir, path)
-
+        # Serve the file
         try:
-            with open(file_path, 'rb') as file:
-                file_content = file.read()
-                start_response('200 OK', [('Content-type', mime_type)])
-                return [file_content]
-        except FileNotFoundError:
-            start_response('404 Not Found', [('Content-type', 'text/plain')])
-            return [b'File Not Found']
+            with open(css_path, 'rb') as file:
+                cssFile = file.read()
+                start_response('200 OK', [('Content-type', 'text/css')]) 
+                return [cssFile]      
         except Exception as e:
             start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
             return [str(e).encode('utf-8')]
-
 
 
 def handle_404(environ, start_response):

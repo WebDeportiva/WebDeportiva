@@ -32,16 +32,17 @@
         {% for registro in registros %}
         <tr>
             <td>{{registro[0]}}</td>
-            <td>{{registro[1]}}</td>
-            <td>{{registro[2]}}</td>
-            <td>{{registro[3]}}</td>
-            <td>{{registro[4]}}</td>
+            <td contenteditable="true">{{registro[1]}}</td>
+            <td contenteditable="true">{{registro[2]}}</td>
+            <td contenteditable="true">{{registro[3]}}</td>
+            <td contenteditable="true">{{registro[4]}}</td>
             <td>
                 <form method="post" action="/">
                     <input type="hidden" name="id" value="{{registro[0]}}">
+                    <input type="hidden" name="action" value="update">
                     <button type="submit">Borrar</button>
                 </form>
-                <button>Editar</button>
+                <button onclick="editRow(this)">Editar</button>
             </td>
         </tr>
         {% endfor %}

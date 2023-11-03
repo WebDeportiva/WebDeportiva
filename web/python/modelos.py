@@ -80,3 +80,20 @@ def delete_nadador(nadador_id):
     finally:
         db_cursor.close()
         db_connection.close()
+
+
+def update_nadador(data):
+
+    db_connection = connect_to_database()
+    db_cursor = db_connection.cursor()
+    try:
+        # Ejecutar una consulta SQL de actualización utilizando los datos proporcionados
+        query = "UPDATE nadadores SET dni = %s, nombre = %s, apellido = %s, genero = %s WHERE id = %s"
+        db_cursor.execute(query, (data['dni'], data['nombre'], data['apellido'], data['genero'], data['id']))
+        # Confirmar la transacción
+        db_connection.commit()
+    except Exception as e:
+        print("Error al actualizar el registro:", e, data)
+    finally:
+        db_cursor.close()
+        db_connection.close()
