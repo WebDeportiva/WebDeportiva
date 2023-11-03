@@ -18,7 +18,7 @@ def get_nadadores():
 
     try:
         # Realiza una consulta SQL para obtener información de la tabla 'nadadores'
-        db_cursor.execute("SELECT * FROM nadadores")
+        db_cursor.execute("SELECT * FROM nadadores ORDER BY id")
         nadadores = db_cursor.fetchall()
         return nadadores
     except Exception as e:
