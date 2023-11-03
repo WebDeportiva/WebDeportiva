@@ -15,9 +15,12 @@ def app(environ, start_response):
     print(path)
     template
     if path == '/':
-        return handle_crud(environ, start_response)
+        return handle_main(environ, start_response)
     elif path.startswith('/static/'):
         return serve_static(environ, start_response)
+    elif path.startswith('/crud'):
+        return handle_crud(environ, start_response)
+        
     else:
         return handle_404(environ, start_response)
 
@@ -49,7 +52,7 @@ def handle_crud(environ, start_response):
         return handle_404(environ, start_response)
 
     
-# En el controlador
+
 def handle_insert(environ, start_response):
     if environ['REQUEST_METHOD'] == 'POST':
         # Obtener los datos del formulario enviado
@@ -60,6 +63,16 @@ def handle_insert(environ, start_response):
     
     # Redirigir a la página principal o mostrar un mensaje de éxito
     redirect_to_main(environ, start_response)
+
+
+def handle_main(environ, start_response):
+    # Cargar la plantilla específica para otra página
+    template = env.get_template('main.html')
+    response = template.render().encode('utf-8')
+    status = '200 OK'
+    response_headers = [('Content-type', 'text/html')]
+    start_response(status, response_headers)
+    return [response]
 
 
 
