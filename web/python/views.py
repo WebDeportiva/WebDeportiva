@@ -63,19 +63,30 @@ def serve_static(environ, start_response):
     print('static_dir', static_dir)
     path = environ['PATH_INFO']
     #css_path = 'e:/Proyectos_Python/Ej_mvc/static/style.css'
-    css_path = static_dir + '\script.js'
-    # print('css_path:', css_path)
-    # print('os.path', os.path)
+    css_path = static_dir + '\js\script.js'
+    js_path = static_dir +'\css\style.css'
+    
+    print(css_path,js_path)
+
     if not path.startswith('/static/'):
         start_response('404 Not Found', [('Content-type', 'text/plain')])
         return [b'Not Found']
-    else:
+    elif path.startswith('/static/js/'):
         # Serve the file
         try:
             with open(css_path, 'rb') as file:
                 cssFile = file.read()
                 start_response('200 OK', [('Content-type', 'text/css')]) 
                 return [cssFile]      
+        except Exception as e:
+            start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
+            return [str(e).encode('utf-8')]
+    elif path.startswith('/static/css/'):
+        try:
+            with open(js_path, 'rb') as file:
+                jsFile = file.read()
+                start_response('200 OK', [('Content-type', 'application/js')]) 
+                return [jsFile]      
         except Exception as e:
             start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
             return [str(e).encode('utf-8')]
