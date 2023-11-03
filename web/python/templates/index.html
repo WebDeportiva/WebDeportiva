@@ -1,53 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-    
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>CRUD</title>
-        <script src="../static/js/script.js"></script>
-        <link rel="stylesheet" href="../static/css/style.css">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD</title>
+    <script src="../static/js/script.js"></script>
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 
 <body>
-    <h1>CRUD</h1>
 
-    <form method="post" action="/">
-        <input type="text" name="dni" placeholder="DNI" required>
-        <input type="text" name="nombre" placeholder="Nombre" required>
-        <input type="text" name="apellido" placeholder="Apellido" required>
-        <input type="text" name="genero" placeholder="Genero" required>
-        <button type="submit">Insertar</button>
-    </form>
-    
-
-    <table id="datos">
-        <tr>
-            <th>ID</th>
-            <th>DNI</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Genero</th>
-            <th>Acciones</th>
-        </tr>
-        {% for registro in registros %}
-        <tr>
-            <td>{{registro[0]}}</td>
-            <td contenteditable="true">{{registro[1]}}</td>
-            <td contenteditable="true">{{registro[2]}}</td>
-            <td contenteditable="true">{{registro[3]}}</td>
-            <td contenteditable="true">{{registro[4]}}</td>
-            <td>
-                <form method="post" action="/">
-                    <input type="hidden" name="id" value="{{registro[0]}}">
-                    <input type="hidden" name="action" value="update">
-                    <button type="submit">Borrar</button>
-                </form>
-                <button onclick="editRow(this)">Editar</button>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+    <head>
+        <div id="titulo_crud">
+            <h1>CRUD</h1>
+        </div>
+    </head>
+    <main>
+        <div id="form_crud">
+            <form method="post" action="/">
+                <input type="text" name="dni" placeholder="DNI" required>
+                <input type="text" name="nombre" placeholder="Nombre" required>
+                <input type="text" name="apellido" placeholder="Apellido" required>
+                <input type="text" name="genero" placeholder="Genero" required>
+                <button id="insertar"type="submit">Insertar</button>
+            </form>
+        </div>
+        <div id="datos_crud">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>DNI</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Genero</th>
+                    <th>Acciones</th>
+                </tr>
+                {% for registro in registros %}
+                <tr>
+                    <td>{{registro[0]}}</td>
+                    <td contenteditable="true">{{registro[1]}}</td>
+                    <td contenteditable="true">{{registro[2]}}</td>
+                    <td contenteditable="true">{{registro[3]}}</td>
+                    <td contenteditable="true">{{registro[4]}}</td>
+                    <td>
+                        <form method="post" action="/">
+                            <input type="hidden" name="id" value="{{registro[0]}}">
+                            <input type="hidden" name="action" value="delete">
+                            <button id="borrar" type="submit">Borrar</button>
+                        </form>
+                        <button id="editar" onclick="editRow(this)">Editar</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </main>
 </body>
 
 </html>
