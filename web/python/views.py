@@ -41,27 +41,38 @@ def serve_static(environ, start_response):
     #css_path = 'e:/Proyectos_Python/Ej_mvc/static/style.css'
     js_path = static_dir + '\js\script.js'
     css_path = static_dir +'\css\style.css'
-    main_css_path = static_dir + '\css\main_style.css'
+
+    #DIRECTORIO DEL MAIN_CSS
+    main_css_path = static_dir + '\css\style_main.css'
     img_path = static_dir + '\img'
-    
-    print(css_path,js_path)
+
 
     if not path.startswith('/static/'):
         start_response('404 Not Found', [('Content-type', 'text/plain')])
         return [b'Not Found']
     
-
         #CSS DEL CRUD
     elif path.startswith('/static/css/'):
-        # Serve the file
-        try:
-            with open(css_path, 'rb') as file:
-                cssFile = file.read()
-                start_response('200 OK', [('Content-type', 'text/css')]) 
-                return [cssFile]      
-        except Exception as e:
-            start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
-            return [str(e).encode('utf-8')]
+        if path.endswith('style.css'):
+            # Serve the file
+            try:
+                with open(css_path, 'rb') as file:
+                    cssFile = file.read()
+                    start_response('200 OK', [('Content-type', 'text/css')]) 
+                    return [cssFile]      
+            except Exception as e:
+                start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
+                return [str(e).encode('utf-8')]
+        else:
+            try:
+                with open(main_css_path, 'rb') as file:
+                    main_cssFile = file.read()
+                    start_response('200 OK', [('Content-type', 'text/css')]) 
+                    return [main_cssFile]      
+            except Exception as e:
+                start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
+                return [str(e).encode('utf-8')]
+
         
 
         # JAVASCRIPT DEL CRUD
@@ -87,17 +98,6 @@ def serve_static(environ, start_response):
             start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
             return [str(e).encode('utf-8')]
         
-        #ESTILOS DE LA PAGINA WEP
-
-    elif path.startswith('/static/css/main_style.css'):
-        try:
-            with open(main_css_path, 'rb') as file:
-                cssFile = file.read()
-                start_response('200 OK', [('Content-type', 'text/css')]) 
-                return [cssFile]      
-        except Exception as e:
-            start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
-            return [str(e).encode('utf-8')]
 
 
 
