@@ -29,6 +29,7 @@ def serve_static(environ, start_response):
     #css_path = 'e:/Proyectos_Python/Ej_mvc/static/style.css'
     js_path = static_dir + '\js\script.js'
     css_path = static_dir +'\css\style.css'
+    img_path = static_dir + '\img'
     
     print(css_path,js_path)
 
@@ -54,6 +55,16 @@ def serve_static(environ, start_response):
         except Exception as e:
             start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
             return [str(e).encode('utf-8')]
+    elif path.startswith('/static/img/'):
+        try:
+            with open(img_path, 'rb') as file:
+                imgFile = file.read()
+                start_response('200 OK', [('Content-type', 'image/png')] if path.endswith('.png') else [('Content-type', 'image/jpeg')] if path.endswith('.jpg') else [('Content-type', 'image/gif')] if path.endswith('.gif') else [('Content-type', 'image/jpeg')]) 
+                return[imgFile]
+        except:
+            start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
+            return [str(e).encode('utf-8')]
+
 
 
 def handle_404(environ, start_response):

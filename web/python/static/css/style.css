@@ -38,12 +38,14 @@ table, td, th{
 
 #editar{
   background-color: rgb(82, 82, 211);
-  padding: 2px;
+  padding: 5px;
+  width: 70px;
 }
 
 #borrar{
   background-color: rgb(235, 25, 25);
-  padding: 2px;
+  padding: 5px;
+  width: 70px;
 }
 button{
   border-radius: 2px;
