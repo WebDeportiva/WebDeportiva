@@ -44,7 +44,9 @@ def serve_static(environ, start_response):
 
     #DIRECTORIO DEL MAIN_CSS
     main_css_path = static_dir + '\css\style_main.css'
-    img_path = static_dir + '\img'
+
+    #DIRECTORIO DE IMAGENES
+    
 
 
     if not path.startswith('/static/'):
@@ -72,7 +74,6 @@ def serve_static(environ, start_response):
             except Exception as e:
                 start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
                 return [str(e).encode('utf-8')]
-
         
 
         # JAVASCRIPT DEL CRUD
@@ -90,7 +91,7 @@ def serve_static(environ, start_response):
         #SIN MAS LAS FOTOS
     elif path.startswith('/static/img/'):
         try:
-            with open(img_path, 'rb') as file:
+            # with open(, 'rb') as file:
                 imgFile = file.read()
                 start_response('200 OK', [('Content-type', 'image/png')] if path.endswith('.png') else [('Content-type', 'image/jpeg')] if path.endswith('.jpg') else [('Content-type', 'image/gif')] if path.endswith('.gif') else [('Content-type', 'image/jpeg')]) 
                 return[imgFile]
