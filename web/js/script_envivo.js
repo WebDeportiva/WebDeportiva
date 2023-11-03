@@ -16,16 +16,16 @@ document.addEventListener('DOMContentLoaded', function() {
             {
                 prueba: 'Prueba 200m Libre',
                 parciales: [
-                    'Nadador 1: 1m 10s',
-                    'Nadador 2: 1m 12s',
-                    'Nadador 3: 1m 09s',
-                    'Nadador 4: 1m 14s',
-                    'Nadador 5: 1m 08s',
-                    'Nadador 6: 1m 11s',
-                    'Nadador 7: 1m 15s',
-                    'Nadador 8: 1m 13s'
+                    'Nadador 1: 1m 00s',
+                    'Nadador 2: 59s',
+                    'Nadador 3: 58s',
+                    'Nadador 4: 56s',
+                    'Nadador 5: 57s',
+                    'Nadador 6: 59s',
+                    'Nadador 7: 1m 02s',
+                    'Nadador 8: 1m 00s'
                 ],
-                tiempoFinal: 'Tiempo Final: 4m 45s'
+                tiempoFinal: 'Tiempo Final: 1m 57s'
             },
             {
                 prueba: 'Prueba 100m Espalda',
@@ -53,42 +53,42 @@ document.addEventListener('DOMContentLoaded', function() {
                     'Nadador 7: 34s',
                     'Nadador 8: 32s'
                 ],
-                tiempoFinal: 'Tiempo Final: 2m 15s'
+                tiempoFinal: 'Tiempo Final: 56s'
             },
             {
                 prueba: 'Prueba 100m Braza',
                 parciales: [
-                    'Nadador 1: 37s',
-                    'Nadador 2: 38s',
+                    'Nadador 1: 39s',
+                    'Nadador 2: 37s',
                     'Nadador 3: 36s',
-                    'Nadador 4: 35s',
+                    'Nadador 4: 33s',
                     'Nadador 5: 34s',
-                    'Nadador 6: 33s',
-                    'Nadador 7: 39s',
+                    'Nadador 6: 36s',
+                    'Nadador 7: 34s',
                     'Nadador 8: 37s'
                 ],
-                tiempoFinal: 'Tiempo Final: 2m 55s'
+                tiempoFinal: 'Tiempo Final: 1m 08s'
             },
             {
                 prueba: 'Prueba 200m Mariposa',
                 parciales: [
-                    'Nadador 1: 1m 40s',
-                    'Nadador 2: 1m 52s',
-                    'Nadador 3: 1m 09s',
-                    'Nadador 4: 1m 44s',
-                    'Nadador 5: 1m 38s',
-                    'Nadador 6: 1m 21s',
+                    'Nadador 1: 1m 08s',
+                    'Nadador 2: 1m 06s',
+                    'Nadador 3: 1m 04s',
+                    'Nadador 4: 1m 00s',
+                    'Nadador 5: 1m 02s',
+                    'Nadador 6: 1m 07s',
                     'Nadador 7: 1m 11s',
-                    'Nadador 8: 1m 19s'
+                    'Nadador 8: 1m 13s'
                 ],
-                tiempoFinal: 'Tiempo Final: 1m 45s'
+                tiempoFinal: 'Tiempo Final: 2m 09s'
             },
             {
                 prueba: 'Prueba 200m Espalda',
                 parciales: [
-                    'Nadador 1: 1m 50s',
-                    'Nadador 2: 1m 22s',
-                    'Nadador 3: 1m 49s',
+                    'Nadador 1: 1m 08s',
+                    'Nadador 2: 1m 05s',
+                    'Nadador 3: 1m 04   s',
                     'Nadador 4: 1m 24s',
                     'Nadador 5: 1m 18s',
                     'Nadador 6: 1m 41s',
