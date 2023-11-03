@@ -18,7 +18,7 @@
     </head>
     <main>
         <div id="form_crud">
-            <form method="post" action="/">
+            <form method="post" action="/crud">
                 <input type="text" name="dni" placeholder="DNI" required>
                 <input type="text" name="nombre" placeholder="Nombre" required>
                 <input type="text" name="apellido" placeholder="Apellido" required>
@@ -44,7 +44,7 @@
                     <td contenteditable="true">{{registro[3]}}</td>
                     <td contenteditable="true">{{registro[4]}}</td>
                     <td>
-                        <form method="post" action="/">
+                        <form method="post" action="/crud">
                             <input type="hidden" name="id" value="{{registro[0]}}">
                             <input type="hidden" name="action" value="delete">
                             <button id="borrar" type="submit">Borrar</button>
