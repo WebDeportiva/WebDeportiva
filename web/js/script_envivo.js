@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 parciales: [
                     'Nadador 1: 1m 08s',
                     'Nadador 2: 1m 05s',
-                    'Nadador 3: 1m 04   s',
+                    'Nadador 3: 1m 04s',
                     'Nadador 4: 1m 24s',
                     'Nadador 5: 1m 18s',
                     'Nadador 6: 1m 41s',
