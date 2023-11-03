@@ -49,7 +49,7 @@ function sendUpdatedData(data) {
         formData.append(key, data[key]);
     }
 
-    fetch('/', {
+    fetch('/crud', {
         method: 'POST',
         body: formData, // Convierte los datos en formato JSON
         headers: {

@@ -61,7 +61,7 @@ def parse_post_data(environ):
 def redirect_to_main(environ, start_response):
     # Redirigir al usuario a la página principal (cambia la URL según tu estructura)
     status = '302 Found'
-    response_headers = [('Location', '/')]  # Cambia la URL de redirección según tu estructura
+    response_headers = [('Location', '/crud')]  # Cambia la URL de redirección según tu estructura
     start_response(status, response_headers)
     return [b'']
 
@@ -86,12 +86,14 @@ def update_nadador(data):
 
     db_connection = connect_to_database()
     db_cursor = db_connection.cursor()
+    
     try:
         # Ejecutar una consulta SQL de actualización utilizando los datos proporcionados
         query = "UPDATE nadadores SET dni = %s, nombre = %s, apellido = %s, genero = %s WHERE id = %s"
         db_cursor.execute(query, (data['dni'], data['nombre'], data['apellido'], data['genero'], data['id']))
         # Confirmar la transacción
         db_connection.commit()
+        print(f'Datos actualizados: {data}')
     except Exception as e:
         print("Error al actualizar el registro:", e, data)
     finally:
