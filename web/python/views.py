@@ -46,7 +46,7 @@ def serve_static(environ, start_response):
     main_css_path = static_dir + '\css\style_main.css'
 
     #DIRECTORIO DE IMAGENES
-    
+    img_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), 'static', 'img'))
 
 
     if not path.startswith('/static/'):
@@ -90,15 +90,30 @@ def serve_static(environ, start_response):
 
         #SIN MAS LAS FOTOS
     elif path.startswith('/static/img/'):
+        # Obtén el nombre de la imagen desde la URL
+        image_name = os.path.basename(path)
+        image_path = os.path.join(img_folder, image_name)
+
         try:
-            # with open(, 'rb') as file:
-                imgFile = file.read()
-                start_response('200 OK', [('Content-type', 'image/png')] if path.endswith('.png') else [('Content-type', 'image/jpeg')] if path.endswith('.jpg') else [('Content-type', 'image/gif')] if path.endswith('.gif') else [('Content-type', 'image/jpeg')]) 
-                return[imgFile]
+            with open(image_path, 'rb') as file:
+                image_data = file.read()
+
+            content_type = 'image/jpeg'  # Tipo de contenido predeterminado
+            if image_name.endswith('.png'):
+                content_type = 'image/png'
+            elif image_name.endswith('.jpg') or image_name.endswith('.jpeg'):
+                content_type = 'image/jpeg'
+            elif image_name.endswith('.gif'):
+                content_type = 'image/gif'
+
+            start_response('200 OK', [('Content-type', content_type)])
+            return [image_data]
+        except FileNotFoundError:
+            start_response('404 Not Found', [('Content-type', 'text/plain')])
+            return [b'Not Found']
         except Exception as e:
             start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
             return [str(e).encode('utf-8')]
-        
 
 
 
