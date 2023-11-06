@@ -1,7 +1,7 @@
 from wsgiref.simple_server import make_server
 from jinja2 import Environment, FileSystemLoader
 import os
-from modelos import get_nadadores, insert_nadador, parse_post_data, redirect_to_main, delete_nadador, update_nadador
+from modelos import get_nadadores, insert_nadador, parse_post_data, redirect_to_main, delete_nadador, update_nadador, get_pruebas
 from views import serve_static
 
 
@@ -60,11 +60,9 @@ def handle_crud(environ, start_response):
 def handle_insert(environ, start_response):
     if environ['REQUEST_METHOD'] == 'POST':
         # Obtener los datos del formulario enviado
-        post_data = parse_post_data(environ)
-        
+        post_data = parse_post_data(environ)   
         # Llamar a la función para insertar el registro
         insert_nadador(post_data)
-    
     # Redirigir a la página principal o mostrar un mensaje de éxito
     redirect_to_main(environ, start_response)
 
@@ -79,12 +77,14 @@ def handle_main(environ, start_response):
     return [response]
 
 def handle_ranking(environ, start_response):
-    template = env.get_template('ranking.html')
-    response = template.render().encode('utf-8')
-    status = '200 OK'
-    response_headers = [('Content-type', 'text/html')]
-    start_response(status, response_headers)
-    return [response]
+    if environ['REQUEST_METHOD'] == 'GET':
+        template = env.get_template('ranking.html')
+        resultados = get_pruebas()
+        response = template.render(resultados=resultados).encode('utf-8')
+        status = '200 OK'
+        response_headers = [('Content-type', 'text/html')]
+        start_response(status, response_headers)
+        return [response]
 
 def handle_about(environ, start_response):
     template = env.get_template('about_us.html')
@@ -104,7 +104,7 @@ def handle_404(environ, start_response):
 if __name__ == "__main__":
     host = 'localhost'
     port = 8000
-    print(get_nadadores())
     httpd = make_server(host, port, app)
+    print(get_pruebas())
     print(f"Servidor en http://{host}:{port}")
     httpd.serve_forever()

@@ -1,37 +1,6 @@
 from jinja2 import Environment, FileSystemLoader
 import os
 
-env = Environment(loader=FileSystemLoader('web/python/templates'))
-template = env.get_template('index.html')
-
-# Función para manejar la ruta '/crud'
-def handle_crud(environ, start_response, db_cursor):
-    # Realiza una consulta SQL para obtener información de la tabla 'nadadores'
-    db_cursor.execute("SELECT * FROM nadadores")
-    nadadores = db_cursor.fetchall()
-
-    template = env.get_template('index.html')  # Asegúrate de tener 'crud.html' en tu carpeta de templates
-
-    # Renderiza la plantilla 'crud.html' con los datos de la tabla 'nadadores'
-    response = template.render(nadadores=nadadores).encode('utf-8')
-
-    status = '200 OK'
-    response_headers = [('Content-type', 'text/html')]
-    start_response(status, response_headers)
-    return [response]
-
-#PAGINA PRINCIPAL
-
-
-def handle_main(environ, start_response):
-    # Cargar la plantilla específica para otra página
-    template = env.get_template('main.html')
-    response = template.render().encode('utf-8')
-    status = '200 OK'
-    response_headers = [('Content-type', 'text/html')]
-    start_response(status, response_headers)
-    return [response]
-
 
 def serve_static(environ, start_response):
     # static_dir = './static'  

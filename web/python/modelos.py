@@ -12,6 +12,34 @@ def connect_to_database():
 
     return db_connection
 
+def get_pruebas():
+    
+    db_connection = connect_to_database()
+    db_cursor = db_connection.cursor()
+
+    try:
+        db_cursor.execute('''SELECT
+    c.nombre AS nombre_competicion,
+    n.nombre AS nombre_nadador,
+    n.apellido AS apellido_nadador,
+    r.prueba,
+    r.tiempo AS resultado
+FROM resultados r
+JOIN nadadores n ON r.id_nadador = n.id
+JOIN detalle_resultado dr ON r.id = dr.id_resultado
+JOIN detalle_competi dc ON dr.id_detalle = dc.id_detalle_competi
+JOIN competiciones c ON dc.id_competicion = c.id ORDER BY c.nombre, r.tiempo''')
+        
+        resultados = db_cursor.fetchall()
+        return resultados
+    except Exception as e:
+        print("Error al obtener los datos de la tabla 'resultados':", e)
+
+    finally:
+        db_cursor.close()
+        db_connection.close()
+
+
 def get_nadadores():
     db_connection = connect_to_database()
     db_cursor = db_connection.cursor()

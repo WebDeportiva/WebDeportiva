@@ -285,7 +285,14 @@ input[type="password"] {
 }
 /*css ranking
 /* css del ranking */
-
+#ranking{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
   
 form {
    
@@ -325,6 +332,8 @@ form {
   button:hover {
     background-color: #444;
   }
+
+
    /* pagina sobre nosotros */
  /* Estilos para el encabezado */
 #sobre-nosotros h2 {
