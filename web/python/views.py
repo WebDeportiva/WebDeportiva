@@ -40,6 +40,7 @@ def serve_static(environ, start_response):
     path = environ['PATH_INFO']
     #css_path = 'e:/Proyectos_Python/Ej_mvc/static/style.css'
     js_path = static_dir + '\js\script.js'
+    main_js_path = static_dir + '\js\main_script.js'
     css_path = static_dir +'\css\style.css'
 
     #DIRECTORIO DEL MAIN_CSS
@@ -78,14 +79,24 @@ def serve_static(environ, start_response):
 
         # JAVASCRIPT DEL CRUD
     elif path.startswith('/static/js/'):
-        try:
-            with open(js_path, 'rb') as file:
-                jsFile = file.read()
-                start_response('200 OK', [('Content-type', 'application/js')]) 
-                return [jsFile]      
-        except Exception as e:
-            start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
-            return [str(e).encode('utf-8')]
+        if path.endswith('script.js'):
+            try:
+                with open(js_path, 'rb') as file:
+                    jsFile = file.read()
+                    start_response('200 OK', [('Content-type', 'application/js')]) 
+                    return [jsFile]      
+            except Exception as e:
+                start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
+                return [str(e).encode('utf-8')]
+        else:
+            try:
+                with open(main_js_path, 'rb') as file:
+                    jsFile = file.read()
+                    start_response('200 OK', [('Content-type', 'application/js')]) 
+                    return [jsFile]      
+            except Exception as e:
+                start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
+                return [str(e).encode('utf-8')]
         
 
         #SIN MAS LAS FOTOS
