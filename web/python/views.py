@@ -40,7 +40,7 @@ def serve_static(environ, start_response):
     path = environ['PATH_INFO']
     #css_path = 'e:/Proyectos_Python/Ej_mvc/static/style.css'
     js_path = static_dir + '\js\script.js'
-    main_js_path = static_dir + '\js\main_script.js'
+    main_js_path = static_dir + '\js\script_main.js'
     css_path = static_dir +'\css\style.css'
 
     #DIRECTORIO DEL MAIN_CSS

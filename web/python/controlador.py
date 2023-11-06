@@ -16,6 +16,8 @@ def app(environ, start_response):
     template
     if path == '/':
         return handle_main(environ, start_response)
+    elif path.startswith('/ranking'):
+        return handle_ranking(environ,start_response)
     elif path.startswith('/static/'):
         return serve_static(environ, start_response)
     elif path.startswith('/crud'):
@@ -74,6 +76,13 @@ def handle_main(environ, start_response):
     start_response(status, response_headers)
     return [response]
 
+def handle_ranking(environ, start_response):
+    template = env.get_template('ranking.html')
+    response = template.render().encode('utf-8')
+    status = '200 OK'
+    response_headers = [('Content-type', 'text/html')]
+    start_response(status, response_headers)
+    return [response]
 
 
 def handle_404(environ, start_response):
