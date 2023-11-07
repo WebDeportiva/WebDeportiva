@@ -1,7 +1,7 @@
 from wsgiref.simple_server import make_server
 from jinja2 import Environment, FileSystemLoader
 import os
-from modelos import get_nadadores, insert_nadador, parse_post_data, redirect_to_main, delete_nadador, update_nadador, get_pruebas
+from modelos import get_nadadores, insert_nadador, parse_post_data, redirect_to_main, delete_nadador, update_nadador, get_pruebas, show_selections, show_selections2, cambiar_tabla
 from views import serve_static
 
 
@@ -80,11 +80,25 @@ def handle_ranking(environ, start_response):
     if environ['REQUEST_METHOD'] == 'GET':
         template = env.get_template('ranking.html')
         resultados = get_pruebas()
-        response = template.render(resultados=resultados).encode('utf-8')
+        
+        #Mostrar las opciones del selector PRUEBAS
+        pruebas = show_selections()
+        #Mostrar las opciones del selector COMPETICIONES
+        competiciones = show_selections2()
+
+        response = template.render(resultados=resultados, pruebas=pruebas, competiciones=competiciones).encode('utf-8')
         status = '200 OK'
         response_headers = [('Content-type', 'text/html')]
         start_response(status, response_headers)
         return [response]
+    elif environ['REQUEST_METHOD']=='POST':
+        post_data = parse_post_data(environ)
+        if post_data:
+            resultados_json = cambiar_tabla(post_data)
+            status = '200 OK'
+            response_headers = [('Content-type', 'application/json')]
+            start_response(status, response_headers)
+            return [resultados_json.encode('utf-8')]
 
 def handle_about(environ, start_response):
     template = env.get_template('about_us.html')
@@ -105,6 +119,5 @@ if __name__ == "__main__":
     host = 'localhost'
     port = 8000
     httpd = make_server(host, port, app)
-    print(get_pruebas())
     print(f"Servidor en http://{host}:{port}")
     httpd.serve_forever()

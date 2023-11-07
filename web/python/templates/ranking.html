@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/style_main.css">
     <title>Web de Natacion</title>
+    <script src="../static/js/script.js"></script>
 
 </head>
 
@@ -26,15 +27,23 @@
         </div>
     </div>
 
-    <form action="" method="post">
-        <h1>Consulta de marcas</h1>
-        <div class="campos">
-            <label for="">Selecionar prueba:</label>
+    <h1>Consulta de marcas</h1>
+    <form id="consultaForm" method="POST">
+        <label for="pruebas">Competiciones:</label>
+        <select id="pruebas" name="competiciones">
+            <option value=""></option>
+            {% for i in competiciones %}
+            <option value={{i}}>{{i}}</option>
+            {% endfor %}
+        </select>
 
-            <select id="miSelector">
-                <option value="opcion1"></option>
-            </select>
-        </div>
+        <label for="competiciones">Pruebas:</label>
+        <select id="competiciones" name="pruebas">
+            <option value=""></option>
+            {% for i in pruebas %}
+            <option value={{i}}>{{i}}</option>
+            {% endfor %}
+        </select>
         <button type="submit">Consultar</button>
     </form>
     <div id="ranking">

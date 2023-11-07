@@ -1,4 +1,5 @@
 import psycopg2
+import json
 
 def connect_to_database():
     # Configura la conexión a la base de datos PostgreSQL
@@ -12,6 +13,50 @@ def connect_to_database():
 
     return db_connection
 
+#CAMBIAR DATOS DE LA TABLA:
+
+def cambiar_tabla(data):
+    db_connection = connect_to_database()
+    db_cursor = db_connection.cursor()
+    
+    competicion = data.get('competicines','')#Aqui se referiría al valor de la seleccion de competición
+    prueba = data.get('prueba', '')#Aqui se referiría al valor de la seleccion de prueba
+
+    try:
+        db_cursor.execute('''
+    SELECT c.nombre AS nombre_competicion,
+           n.nombre AS nombre_nadador,
+           n.apellido AS apellido_nadador,
+           r.prueba,
+           r.tiempo AS resultado
+    FROM resultados r
+    JOIN nadadores n ON r.id_nadador = n.id
+    JOIN detalle_resultado dr ON r.id = dr.id_resultado
+    JOIN detalle_competi dc ON dr.id_detalle = dc.id_detalle_competi
+    JOIN competiciones c ON dc.id_competicion = c.id
+    WHERE c.nombre = %s AND r.prueba = %s
+    ORDER BY c.nombre, r.tiempo''', (competicion, prueba))
+
+        resultados = db_cursor.fetchall()
+        resultados_json = []
+        for resultado in resultados:
+            resultados_json.append({
+                'nombre_competicion': resultado[0],
+                'nombre_nadador': f"{resultado[1]} {resultado[2]}",
+                'prueba': resultado[3],
+                'resultado': resultado[4]
+            })
+            print(json.dumps(resultados_json))
+        return json.dumps(resultados_json)
+
+    except Exception as e:
+        print("Error al obtener los datos de la tabla 'resultados':", e)
+
+    finally:
+        db_cursor.close()
+        db_connection.close()
+
+#MOSTRAR DATOS DESDE EL INICIO.
 def get_pruebas():
     
     db_connection = connect_to_database()
@@ -24,13 +69,17 @@ def get_pruebas():
     n.apellido AS apellido_nadador,
     r.prueba,
     r.tiempo AS resultado
-FROM resultados r
-JOIN nadadores n ON r.id_nadador = n.id
-JOIN detalle_resultado dr ON r.id = dr.id_resultado
-JOIN detalle_competi dc ON dr.id_detalle = dc.id_detalle_competi
-JOIN competiciones c ON dc.id_competicion = c.id ORDER BY c.nombre, r.tiempo''')
+    FROM resultados r
+    JOIN nadadores n ON r.id_nadador = n.id
+    JOIN detalle_resultado dr ON r.id = dr.id_resultado
+    JOIN detalle_competi dc ON dr.id_detalle = dc.id_detalle_competi
+    JOIN competiciones c ON dc.id_competicion = c.id ORDER BY c.nombre, r.tiempo''')
         
         resultados = db_cursor.fetchall()
+        return resultados
+
+
+
         return resultados
     except Exception as e:
         print("Error al obtener los datos de la tabla 'resultados':", e)
@@ -55,6 +104,32 @@ def get_nadadores():
         db_cursor.close()
         db_connection.close()
 
+def show_selections():
+    db_connection = connect_to_database()
+    db_cursor = db_connection.cursor()
+    try:
+        db_cursor.execute('''SELECT DISTINCT r.prueba FROM resultados r''')
+        pruebas = db_cursor.fetchall()
+
+        return pruebas
+    except Exception as e:
+        print("Error al obtener los datos de la tabla 'nadadores':", e)
+    finally:
+        db_cursor.close()
+        db_connection.close()
+def show_selections2():
+    db_connection = connect_to_database()
+    db_cursor = db_connection.cursor()
+    try:
+        db_cursor.execute('''SELECT DISTINCT c.nombre FROM competiciones c''')
+        pruebas = db_cursor.fetchall()
+
+        return pruebas
+    except Exception as e:
+        print("Error al obtener los datos:", e)
+    finally:
+        db_cursor.close()
+        db_connection.close()
 
 def insert_nadador(data):
     db_connection = connect_to_database()
