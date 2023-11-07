@@ -64,16 +64,16 @@ def get_pruebas():
 
     try:
         db_cursor.execute('''SELECT
-    c.nombre AS nombre_competicion,
-    n.nombre AS nombre_nadador,
-    n.apellido AS apellido_nadador,
-    r.prueba,
-    r.tiempo AS resultado
-    FROM resultados r
-    JOIN nadadores n ON r.id_nadador = n.id
-    JOIN detalle_resultado dr ON r.id = dr.id_resultado
-    JOIN detalle_competi dc ON dr.id_detalle = dc.id_detalle_competi
-    JOIN competiciones c ON dc.id_competicion = c.id ORDER BY c.nombre, r.tiempo''')
+  c.nombre AS nombre_competicion,
+  n.nombre AS nombre_nadador,
+  n.apellido AS apellido_nadador,
+  r.prueba,
+  r.tiempo
+FROM competiciones c
+INNER JOIN detalle_resultado dr ON c.id = dr.id_competicion
+INNER JOIN resultados r ON dr.id_resultado = r.id
+INNER JOIN nadadores n ON dr.id_nadador = n.id
+ORDER BY c.nombre, n.nombre, n.apellido, r.prueba, r.tiempo;''')
         
         resultados = db_cursor.fetchall()
         return resultados
