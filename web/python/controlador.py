@@ -93,12 +93,11 @@ def handle_ranking(environ, start_response):
         return [response]
     elif environ['REQUEST_METHOD']=='POST':
         post_data = parse_post_data(environ)
-        if post_data:
-            resultados_json = cambiar_tabla(post_data)
-            status = '200 OK'
-            response_headers = [('Content-type', 'application/json')]
-            start_response(status, response_headers)
-            return [resultados_json.encode('utf-8')]
+        resultados_json = cambiar_tabla(post_data)
+        status = '200 OK'
+        response_headers = [('Content-type', 'application/json')]
+        start_response(status, response_headers)
+        return [resultados_json.encode('utf-8')]
 
 def handle_about(environ, start_response):
     template = env.get_template('about_us.html')
