@@ -1,6 +1,7 @@
 import psycopg2
 import json
 
+
 def connect_to_database():
     # Configura la conexión a la base de datos PostgreSQL
     db_connection = psycopg2.connect(
@@ -157,7 +158,7 @@ def insert_nadador(data):
     try:
         # Ejecutar una consulta SQL de inserción utilizando los datos proporcionados
         query = "INSERT INTO nadadores (dni, nombre, apellido,genero) VALUES (%s, %s, %s, %s)"
-        db_cursor.execute(query, (data['dni'], data['nombre'], data['apellido'], data['genero']))
+        db_cursor.execute(query, (data['dni'], data['nombre'].encode('utf-8'), data['apellido'].encode('utf-8'), data['genero']))
         # Confirmar la transacción
         db_connection.commit()
     except Exception as e:
