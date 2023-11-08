@@ -1,7 +1,7 @@
 from wsgiref.simple_server import make_server
 from jinja2 import Environment, FileSystemLoader
 import os
-from modelos import get_nadadores, insert_nadador, parse_post_data, redirect_to_main, delete_nadador, update_nadador, get_pruebas, show_selections, show_selections2, cambiar_tabla
+from modelos import get_nadadores, insert_nadador, parse_post_data, redirect_to_main, delete_nadador, update_nadador, show_selections, show_selections2, cambiar_tabla
 from views import serve_static
 
 
@@ -77,27 +77,32 @@ def handle_main(environ, start_response):
     return [response]
 
 def handle_ranking(environ, start_response):
+    template = env.get_template('ranking.html')
     if environ['REQUEST_METHOD'] == 'GET':
-        template = env.get_template('ranking.html')
-        resultados = get_pruebas()
         
         #Mostrar las opciones del selector PRUEBAS
         pruebas = show_selections()
         #Mostrar las opciones del selector COMPETICIONES
         competiciones = show_selections2()
 
-        response = template.render(resultados=resultados, pruebas=pruebas, competiciones=competiciones).encode('utf-8')
+        response = template.render(pruebas=pruebas, competiciones=competiciones).encode('utf-8')
         status = '200 OK'
         response_headers = [('Content-type', 'text/html')]
         start_response(status, response_headers)
         return [response]
     elif environ['REQUEST_METHOD']=='POST':
         post_data = parse_post_data(environ)
+        
+        print(post_data)
+
         resultados_json = cambiar_tabla(post_data)
+
+        print(resultados_json)
+        response = template.render(resultados_json = resultados_json).encode('utf-8')
         status = '200 OK'
-        response_headers = [('Content-type', 'application/json')]
+        response_headers = [('Content-type', 'text/html')]
         start_response(status, response_headers)
-        return [resultados_json.encode('utf-8')]
+        return [response]
 
 def handle_about(environ, start_response):
     template = env.get_template('about_us.html')

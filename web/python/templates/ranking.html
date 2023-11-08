@@ -33,7 +33,7 @@
         <select id="pruebas" name="competiciones">
             <option value=""></option>
             {% for i in competiciones %}
-            <option value={{i}}>{{i}}</option>
+            <option value="{{i}}">{{i}}</option>
             {% endfor %}
         </select>
 
@@ -41,7 +41,7 @@
         <select id="competiciones" name="pruebas">
             <option value=""></option>
             {% for i in pruebas %}
-            <option value={{i}}>{{i}}</option>
+            <option value="{{i}}">{{i}}</option>
             {% endfor %}
         </select>
         <button type="submit">Consultar</button>
@@ -54,14 +54,20 @@
                 <th>Prueba</th>
                 <th>Tiempo (Min)</th>
             </thead>
-            {% for i in resultados %}
+            {% if resultados_json %}
+            {% for i in resultados_json %}
             <tr>
-                <td>{{i[0]}}</td>
-                <td>{{i[1]}} {{i[2]}}</td>
-                <td>{{i[3]}}</td>
-                <td>{{i[4]}}</td>
+                <td>{{ i['nombre_competicion'] }}</td>
+                <td>{{ i['nombre_nadador'] }}</td>
+                <td>{{ i['prueba'] }}</td>
+                <td>{{ i['resultado'] }}</td>
             </tr>
             {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="4">No se encontró información para los criterios seleccionados.</td>
+            </tr>
+            {% endif %}
         </table>
     </div>
 

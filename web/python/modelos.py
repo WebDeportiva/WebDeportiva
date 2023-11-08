@@ -16,11 +16,24 @@ def connect_to_database():
 #CAMBIAR DATOS DE LA TABLA:
 
 def cambiar_tabla(data):
+    dataComp = data['competiciones']
+    dataPrueb = data['pruebas']
+
+
+    dataComp=dataComp.replace('+',' ')
+    dataPrueb=dataPrueb.replace('+',' ')
+
+    # dataComp = dataComp.
+    # dataPrueb = dataPrueb.
+
+    data['competiciones']=dataComp
+    data['pruebas'] = dataPrueb
+    print(data)
     db_connection = connect_to_database()
     db_cursor = db_connection.cursor()
     
-    competicion = data.get('competicines','')#Aqui se referiría al valor de la seleccion de competición
-    prueba = data.get('prueba', '')#Aqui se referiría al valor de la seleccion de prueba
+    competicion = data.get('competiciones','')#Aqui se referiría al valor de la seleccion de competición
+    prueba = data.get('pruebas', '')#Aqui se referiría al valor de la seleccion de prueba
 
     try:
         db_cursor.execute('''
@@ -36,17 +49,18 @@ def cambiar_tabla(data):
     JOIN competiciones c ON dc.id_competicion = c.id
     WHERE c.nombre = %s AND r.prueba = %s
     ORDER BY c.nombre, r.tiempo''', (competicion, prueba))
-
+        
         resultados = db_cursor.fetchall()
+        print('resultados',resultados)
         resultados_json = []
         for resultado in resultados:
             resultados_json.append({
                 'nombre_competicion': resultado[0],
                 'nombre_nadador': f"{resultado[1]} {resultado[2]}",
                 'prueba': resultado[3],
-                'resultado': resultado[4]
+                'resultado': str(resultado[4])
             })
-            print(json.dumps(resultados_json))
+            
         return json.dumps(resultados_json)
 
     except Exception as e:
@@ -57,36 +71,33 @@ def cambiar_tabla(data):
         db_connection.close()
 
 #MOSTRAR DATOS DESDE EL INICIO.
-def get_pruebas():
+# def get_pruebas():
     
-    db_connection = connect_to_database()
-    db_cursor = db_connection.cursor()
+#     db_connection = connect_to_database()
+#     db_cursor = db_connection.cursor()
 
-    try:
-        db_cursor.execute('''SELECT
-  c.nombre AS nombre_competicion,
-  n.nombre AS nombre_nadador,
-  n.apellido AS apellido_nadador,
-  r.prueba,
-  r.tiempo
-FROM competiciones c
-INNER JOIN detalle_resultado dr ON c.id = dr.id_competicion
-INNER JOIN resultados r ON dr.id_resultado = r.id
-INNER JOIN nadadores n ON dr.id_nadador = n.id
-ORDER BY c.nombre, n.nombre, n.apellido, r.prueba, r.tiempo;''')
+#     try:
+#         db_cursor.execute('''SELECT
+#   c.nombre AS nombre_competicion,
+#   n.nombre AS nombre_nadador,
+#   n.apellido AS apellido_nadador,
+#   r.prueba,
+#   r.tiempo
+# FROM competiciones c
+# INNER JOIN detalle_resultado dr ON c.id = dr.id_competicion
+# INNER JOIN resultados r ON dr.id_resultado = r.id
+# INNER JOIN nadadores n ON dr.id_nadador = n.id
+# ORDER BY c.nombre, n.nombre, n.apellido, r.prueba, r.tiempo;''')
         
-        resultados = db_cursor.fetchall()
-        return resultados
+#         resultados = db_cursor.fetchall()
+#         return resultados
 
+#     except Exception as e:
+#         print("Error al obtener los datos de la tabla 'resultados':", e)
 
-
-        return resultados
-    except Exception as e:
-        print("Error al obtener los datos de la tabla 'resultados':", e)
-
-    finally:
-        db_cursor.close()
-        db_connection.close()
+#     finally:
+#         db_cursor.close()
+#         db_connection.close()
 
 
 def get_nadadores():
@@ -110,8 +121,13 @@ def show_selections():
     try:
         db_cursor.execute('''SELECT DISTINCT r.prueba FROM resultados r''')
         pruebas = db_cursor.fetchall()
+        #Formatear la lista:
 
-        return pruebas
+        pruebas_formateadas = [prueba[0] for prueba in pruebas]
+        
+        print('pruebas', pruebas_formateadas)
+
+        return pruebas_formateadas
     except Exception as e:
         print("Error al obtener los datos de la tabla 'nadadores':", e)
     finally:
@@ -122,9 +138,13 @@ def show_selections2():
     db_cursor = db_connection.cursor()
     try:
         db_cursor.execute('''SELECT DISTINCT c.nombre FROM competiciones c''')
-        pruebas = db_cursor.fetchall()
+        competiciones = db_cursor.fetchall()
+        #Formatear la lista:
+        competiciones_formateadas = [competicion[0] for competicion in competiciones]
 
-        return pruebas
+        print('competiciones', competiciones_formateadas)
+
+        return competiciones_formateadas
     except Exception as e:
         print("Error al obtener los datos:", e)
     finally:
