@@ -9,7 +9,9 @@ def connect_to_database():
             user="xabigonz",
             password="Administrador#3",
             host="pgsql03.dinaserver.com",
-            port="5432"
+            port="5432",
+            options="-c search_path=public",
+            client_encoding="utf-8"  # Establecer la codificación aquí
 
     )
 
@@ -159,7 +161,7 @@ def insert_nadador(data):
     try:
         # Ejecutar una consulta SQL de inserción utilizando los datos proporcionados
         query = "INSERT INTO nadadores (dni, nombre, apellido,genero) VALUES (%s, %s, %s, %s)"
-        db_cursor.execute(query, (data['dni'], data['nombre'].encode('utf-8'), data['apellido'].encode('utf-8'), data['genero']))
+        db_cursor.execute(query, (data['dni'], data['nombre'].encode('utf-8'), data['apellido'].encode('utf-8'), data['genero'])).decode('utf-8')
         # Confirmar la transacción
         db_connection.commit()
     except Exception as e:
