@@ -10,6 +10,7 @@ def connect_to_database():
             password="Administrador#3",
             host="pgsql03.dinaserver.com",
             port="5432"
+
     )
 
     return db_connection

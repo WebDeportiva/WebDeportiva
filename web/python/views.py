@@ -1,6 +1,15 @@
 from jinja2 import Environment, FileSystemLoader
 import os
+import urllib.parse
 
+env = Environment(loader=FileSystemLoader('web/python/templates'))
+
+template = env.get_template('index.html')
+
+def url_decode(input_string):
+    return urllib.parse.unquote(input_string)
+
+env.filters['url_decode'] = url_decode
 
 def serve_static(environ, start_response):
     # static_dir = './static'  

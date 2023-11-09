@@ -1,12 +1,12 @@
 from wsgiref.simple_server import make_server
 from jinja2 import Environment, FileSystemLoader
-import os
 from modelos import get_nadadores, insert_nadador, parse_post_data, redirect_to_main, delete_nadador, update_nadador, show_selections, show_selections2, cambiar_tabla
-from views import serve_static
+from views import serve_static, template, env
 
 
-env = Environment(loader=FileSystemLoader('web/python/templates'))
-template = env.get_template('index.html')
+
+
+
 
 
 # Define la función app que manejará las solicitudes.
