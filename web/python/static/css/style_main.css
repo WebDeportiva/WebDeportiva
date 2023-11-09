@@ -213,7 +213,7 @@ background-color: #0056b3;
   justify-content: space-between;
   align-items: center;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .footer p {
@@ -432,6 +432,11 @@ button:hover {
   align-items: center;
   justify-content: center;
   color: white;
-  margin-top: 20px;
+  margin-top: 20px; 
+}
 
+#footer{
+  bottom: 0;
+  position:fixed;
+  width: 100%;
 }
