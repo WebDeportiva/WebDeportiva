@@ -112,42 +112,31 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         ];
 
+        // Escoge la prueba en el orden establecido
+        var nuevaPrueba = pruebas[contadorPruebas];
 
-    var nuevaPrueba = pruebas[contadorPruebas];
+        // Incrementa el contador para la siguiente prueba
+        contadorPruebas = (contadorPruebas + 1) % pruebas.length;
 
-    contadorPruebas = (contadorPruebas + 1) % pruebas.length;
+        // Cambia el contenido en la página
+        pruebaElement.textContent = nuevaPrueba.prueba;
 
-    pruebaElement.textContent = nuevaPrueba.prueba;
+        // Limpia los parciales anteriores
+        parcialesList.innerHTML = '';
 
-    parcialesList.innerHTML = '';
+        // Agrega los nuevos parciales
+        nuevaPrueba.parciales.forEach(function(parcial) {
+            var nuevoItem = document.createElement('li');
+            nuevoItem.textContent = parcial;
+            parcialesList.appendChild(nuevoItem);
+        });
 
-    nuevaPrueba.parciales.forEach(function(parcial) {
-        var nuevoItem = document.createElement('li');
-        nuevoItem.textContent = parcial;
-        parcialesList.appendChild(nuevoItem);
-    });
-
-    piscinaElement.innerHTML = ''; 
-
-    nuevaPrueba.nadadores.forEach(function(tiempo, indice) {
-        var nuevoNadador = document.createElement('div');
-        nuevoNadador.className = 'calle';
-        nuevoNadador.textContent = nuevaPrueba.nadadores[indice];
-        piscinaElement.appendChild(nuevoNadador);
-    });
-
-    tiempoFinalElement.textContent = nuevaPrueba.tiempoFinal;
-
-    tiempoFinalElement.style.display = 'none';
-    setTimeout(function() {
-        tiempoFinalElement.style.display = 'block';
-    }, 120000);
-}
-
-function actualizarContador() {
-    var contadorElement = document.getElementById('contadorCambioPrueba');
-    var minutos = Math.floor(tiempoCambioPrueba / 60);
-    var segundos = tiempoCambioPrueba % 60;
-    contadorElement.textContent = 'Próximo cambio de prueba en: ' + minutos + ' minutos ' + segundos + ' segundos';
+        // Cambia el tiempo final
+        tiempoFinalElement.textContent = nuevaPrueba.tiempoFinal;
+  // Espera dos minutos antes de mostrar el tiempo final
+  tiempoFinalElement.style.display = 'none'; // Ocultar tiempo final
+  setTimeout(function() {
+      tiempoFinalElement.style.display = 'block'; // Mostrar tiempo final
+  }, 120000); // 120000 milisegundos = 2 minutos
 }
 });
