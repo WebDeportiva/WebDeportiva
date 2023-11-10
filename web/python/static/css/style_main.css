@@ -17,8 +17,7 @@ body, h1, ul {
 }
 
 .navbar-logo img {
-  width: 20%;
-  height: 20%;
+  margin-right: 450px;
 }
 
 .navbar-links ul {
