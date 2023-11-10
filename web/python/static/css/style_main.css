@@ -516,3 +516,163 @@ button:hover {
     font-weight: bold;
     margin-top: 20px;
 }
+
+/*RESPONSIVE*/
+
+/* Estilos para pantallas grandes */
+@media only screen and (min-width: 1200px) {
+  .navbar-logo img {
+    width: 15%; /* Reducir el tamaño del logo en pantallas grandes */
+    height: 15%;
+  }
+
+  .container {
+    padding: 20px; /* Aumentar el espacio alrededor del contenido en pantallas grandes */
+  }
+}
+
+/* Estilos para pantallas medianas */
+@media only screen and (max-width: 1199px) {
+  .navbar {
+    flex-direction: column; /* Cambiar la dirección del flexbox en pantallas medianas */
+    align-items: center;
+  }
+
+  .navbar-logo img {
+    width: 50%; /* Ajustar el tamaño del logo en pantallas medianas */
+    height: 50%;
+    margin-bottom: 10px; /* Agregar espacio entre el logo y los enlaces */
+  }
+
+  .navbar-links {
+    width: 100%; /* Asegurar que los enlaces ocupen todo el ancho en pantallas medianas */
+  }
+
+  .navbar-links ul {
+    flex-direction: column; /* Cambiar la dirección del flexbox en pantallas medianas */
+    text-align: center;
+  }
+
+  .navbar-links li {
+    margin-right: 0; /* Eliminar el margen derecho en pantallas medianas */
+    margin-bottom: 10px; /* Agregar espacio entre los enlaces en pantallas medianas */
+  }
+
+  .banner {
+    height: 300px; /* Ajustar la altura del banner en pantallas medianas */
+  }
+
+  .slider {
+    width: 400%; /* Ajustar el ancho total de los slides en pantallas medianas */
+  }
+
+  .slide {
+    flex: 0 0 50%; /* Ajustar el ancho de cada slide en pantallas medianas */
+  }
+
+  .nav {
+    top: 40%; /* Ajustar la posición de los controles de navegación en pantallas medianas */
+  }
+}
+
+/* Estilos para pantallas pequeñas */
+@media only screen and (max-width: 767px) {
+  .navbar {
+    padding: 5px; /* Reducir el espacio alrededor de la barra de navegación en pantallas pequeñas */
+  }
+
+  .navbar-logo img {
+    width: 70%; /* Ajustar el tamaño del logo en pantallas pequeñas */
+    height: 70%;
+  }
+
+  .navbar-links {
+    display: none; /* Ocultar los enlaces en pantallas pequeñas */
+    flex-direction: column;
+    text-align: center;
+    position: absolute;
+    top: 60px; /* Ajustar la posición de los enlaces en pantallas pequeñas */
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    z-index: 1;
+  }
+
+  .navbar-links.show {
+    display: flex; /* Mostrar los enlaces cuando se hace clic en el icono del menú */
+  }
+
+  .navbar-links ul {
+    flex-direction: column;
+  }
+
+  .navbar-links li {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .banner {
+    height: 200px; /* Ajustar la altura del banner en pantallas pequeñas */
+  }
+
+  .slider {
+    width: 600%; /* Ajustar el ancho total de los slides en pantallas pequeñas */
+  }
+
+  .slide {
+    flex: 0 0 100%; /* Ajustar el ancho de cada slide en pantallas pequeñas */
+  }
+
+  .nav {
+    top: 30%; /* Ajustar la posición de los controles de navegación en pantallas pequeñas */
+  }
+}
+
+/* Estilos para dispositivos muy pequeños (como teléfonos) */
+@media only screen and (max-width: 480px) {
+  .navbar-logo img {
+    width: 80%; /* Ajustar el tamaño del logo en pantallas muy pequeñas */
+    height: 80%;
+  }
+
+  .navbar-links {
+    top: 50px; /* Ajustar la posición de los enlaces en pantallas muy pequeñas */
+  }
+
+  .banner {
+    height: 150px; /* Ajustar la altura del banner en pantallas muy pequeñas */
+  }
+
+  .slider {
+    width: 800%; /* Ajustar el ancho total de los slides en pantallas muy pequeñas */
+  }
+
+  .slide {
+    flex: 0 0 100%; /* Ajustar el ancho de cada slide en pantallas muy pequeñas */
+  }
+
+  .nav {
+    top: 20%; /* Ajustar la posición de los controles de navegación en pantallas muy pequeñas */
+  }
+}
+
+/* Estilos para el contenedor de historia en pantallas pequeñas */
+@media only screen and (max-width: 767px) {
+  #historia {
+    flex-direction: column; /* Cambiar la dirección del flexbox en pantallas pequeñas */
+    text-align: center;
+  }
+
+  .historia-banner,
+  .historia-contenido {
+    margin-right: 0; /* Eliminar el margen derecho en pantallas pequeñas */
+  }
+
+  .historia-banner img {
+    max-width: 100%; /* Asegurar que la imagen no se desborde en pantallas pequeñas */
+  }
+
+  .imagen-columna {
+    margin-top: 10px; /* Ajustar el espacio entre la columna de imágenes y el texto en pantallas pequeñas */
+  }
+}
