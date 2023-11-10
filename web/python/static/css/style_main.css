@@ -451,3 +451,68 @@ button:hover {
   position:fixed;
   width: 100%;
 }
+
+ /* Estilo para ennvivo.html*/
+.body2 {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #E0F2F1; /* Color de fondo que evoca el agua de una piscina */
+}
+.evento {
+    text-align: center;
+    padding: 20px;
+}
+.titulo {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.prueba {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.piscina {
+    position: relative;
+    width: 1000px;
+    height: 400px;
+    margin: auto;
+    background-image: url('../img/piscina.jpg');
+    background-size: cover;
+    border: 10px solid #004D40;
+    border-radius: 10px;
+}
+.calle {
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    background-color: rgba(0, 0, 255, 0.3);
+    text-align: center;
+    line-height: 50px;
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.calle:nth-child(1) { bottom: 10px; left: 20px; }
+.calle:nth-child(2) { bottom: 10px; left: 140px; }
+.calle:nth-child(3) { bottom: 10px; left: 265px; }
+.calle:nth-child(4) { bottom: 10px; left: 390px; }
+.calle:nth-child(5) { bottom: 10px; left: 510px; }
+.calle:nth-child(6) { bottom: 10px; left: 635px; }
+.calle:nth-child(7) { bottom: 10px; left: 755px; }
+.calle:nth-child(8) { bottom: 10px; left: 880px; }
+.parciales ul {
+    list-style-type: none;
+    padding: 0;
+}
+.parciales li {
+    font-size: 18px;
+    margin: 5px 0;
+}
+.tiempo-final {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
