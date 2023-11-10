@@ -56,17 +56,17 @@ function sendUpdatedData(data) {
             'Content-Type': 'application/json' // Indica que los datos son JSON
         }
     })
-    .then(response => {
-        if (response.ok) {
-            // Manejar una respuesta exitosa, si es necesario
-            console.log('Datos actualizados con éxito');
-        } else {
-            // Manejar errores de respuesta, si es necesario
-            console.error('Error al actualizar datos');
-        }
-    })
-    .catch(error => {
-        // Manejar errores de red u otros errores, si es necesario
-        console.error('Error de red:', error);
-    });
+        .then(response => {
+            if (response.ok) {
+                // Manejar una respuesta exitosa, si es necesario
+                console.log('Datos actualizados con éxito');
+            } else {
+                // Manejar errores de respuesta, si es necesario
+                console.error('Error al actualizar datos');
+            }
+        })
+        .catch(error => {
+            // Manejar errores de red u otros errores, si es necesario
+            console.error('Error de red:', error);
+        });
 }

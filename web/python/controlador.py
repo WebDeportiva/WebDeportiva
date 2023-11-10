@@ -3,13 +3,10 @@ from jinja2 import Environment, FileSystemLoader
 from modelos import get_nadadores, insert_nadador, parse_post_data, redirect_to_main, delete_nadador, update_nadador, show_selections, show_selections2, cambiar_tabla
 from views import serve_static, template, env
 
-
 # Define la función app que manejará las solicitudes.
 def app(environ, start_response):
     path = environ.get('PATH_INFO')
     print(path)
-
-
 
     if path == '/':
         return handle_main(environ, start_response)
@@ -26,11 +23,12 @@ def app(environ, start_response):
     else:
         return handle_404(environ, start_response)
 
-# Funciones para manejar las rutas específicas
-# Funciones para manejar las rutas específicas
+
 def handle_crud(environ, start_response):
+
     # Agrega la lógica de autenticación aquí
     post_data = parse_post_data(environ)
+
     if environ['REQUEST_METHOD'] == 'GET':
         # Manejar solicitudes GET para mostrar datos
         registros = get_nadadores()
@@ -41,7 +39,6 @@ def handle_crud(environ, start_response):
         return [response]
 
     elif environ['REQUEST_METHOD'] == 'POST':
-
         # Continuar con el manejo de solicitudes POST para insertar, eliminar o actualizar datos
         if post_data:
             if 'id' in post_data:
@@ -58,6 +55,7 @@ def handle_crud(environ, start_response):
 
         else:
             return handle_404(environ, start_response)
+
 
     
 

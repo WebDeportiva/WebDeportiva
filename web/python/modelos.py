@@ -1,7 +1,5 @@
-import http.cookies
 import psycopg2
 from views import url_decode
-import hashlib
 
 
 def connect_to_database():
@@ -77,6 +75,8 @@ def cambiar_tabla(data):
         db_connection.close()
 
 
+
+
 def get_nadadores():
     db_connection = connect_to_database()
     db_cursor = db_connection.cursor()
@@ -91,6 +91,8 @@ def get_nadadores():
     finally:
         db_cursor.close()
         db_connection.close()
+
+
 
 def show_selections():
     db_connection = connect_to_database()
@@ -202,6 +204,10 @@ def update_nadador(data):
     
     try:
         # Ejecutar una consulta SQL de actualización utilizando los datos proporcionados
+
+        data['nombre'] = url_decode(data['nombre'])
+        data['apellido'] = url_decode(data['apellido'])
+
         query = "UPDATE nadadores SET dni = %s, nombre = %s, apellido = %s, genero = %s WHERE id = %s"
         db_cursor.execute(query, (data['dni'], data['nombre'], data['apellido'], data['genero'], data['id']))
         # Confirmar la transacción
