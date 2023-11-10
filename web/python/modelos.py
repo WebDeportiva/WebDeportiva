@@ -1,5 +1,7 @@
+import http.cookies
 import psycopg2
 from views import url_decode
+import hashlib
 
 
 def connect_to_database():
@@ -16,6 +18,7 @@ def connect_to_database():
     )
 
     return db_connection
+
 
 #CAMBIAR DATOS DE LA TABLA:
 
@@ -72,35 +75,6 @@ def cambiar_tabla(data):
     finally:
         db_cursor.close()
         db_connection.close()
-
-#MOSTRAR DATOS DESDE EL INICIO.
-# def get_pruebas():
-    
-#     db_connection = connect_to_database()
-#     db_cursor = db_connection.cursor()
-
-#     try:
-#         db_cursor.execute('''SELECT
-#   c.nombre AS nombre_competicion,
-#   n.nombre AS nombre_nadador,
-#   n.apellido AS apellido_nadador,
-#   r.prueba,
-#   r.tiempo
-# FROM competiciones c
-# INNER JOIN detalle_resultado dr ON c.id = dr.id_competicion
-# INNER JOIN resultados r ON dr.id_resultado = r.id
-# INNER JOIN nadadores n ON dr.id_nadador = n.id
-# ORDER BY c.nombre, n.nombre, n.apellido, r.prueba, r.tiempo;''')
-        
-#         resultados = db_cursor.fetchall()
-#         return resultados
-
-#     except Exception as e:
-#         print("Error al obtener los datos de la tabla 'resultados':", e)
-
-#     finally:
-#         db_cursor.close()
-#         db_connection.close()
 
 
 def get_nadadores():
@@ -176,8 +150,13 @@ def insert_nadador(data):
         db_connection.close()
 
 def parse_post_data(environ):
-    # Obtener el tamaño de los datos POST
-    content_length = int(environ.get('CONTENT_LENGTH', 0))
+    try:
+        # Obtener el tamaño de los datos POST
+        content_length = int(environ.get('CONTENT_LENGTH', '0'))
+    except ValueError:
+        # Manejar el caso en que no se puede convertir a entero (cadena vacía u otro valor no válido)
+        content_length = 0
+
     if content_length > 0:
         # Leer los datos POST del cuerpo de la solicitud
         post_data = environ['wsgi.input'].read(content_length).decode('utf-8')
@@ -188,6 +167,9 @@ def parse_post_data(environ):
             key, value = pair.split('=')
             data[key] = value
         return data
+    else:
+        return {}
+
 
 def redirect_to_main(environ, start_response):
     # Redirigir al usuario a la página principal (cambia la URL según tu estructura)

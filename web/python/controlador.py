@@ -4,16 +4,13 @@ from modelos import get_nadadores, insert_nadador, parse_post_data, redirect_to_
 from views import serve_static, template, env
 
 
-
-
-
-
-
 # Define la función app que manejará las solicitudes.
 def app(environ, start_response):
     path = environ.get('PATH_INFO')
     print(path)
-    template
+
+
+
     if path == '/':
         return handle_main(environ, start_response)
     elif path.startswith('/ranking'):
@@ -25,12 +22,15 @@ def app(environ, start_response):
     elif path.startswith('/crud'):
         return handle_crud(environ, start_response)
     elif path.startswith('/envivo'):
-        return handle_envivo(environ, start_response)    
+        return handle_envivo(environ, start_response)  
     else:
         return handle_404(environ, start_response)
 
 # Funciones para manejar las rutas específicas
+# Funciones para manejar las rutas específicas
 def handle_crud(environ, start_response):
+    # Agrega la lógica de autenticación aquí
+    post_data = parse_post_data(environ)
     if environ['REQUEST_METHOD'] == 'GET':
         # Manejar solicitudes GET para mostrar datos
         registros = get_nadadores()
@@ -39,9 +39,10 @@ def handle_crud(environ, start_response):
         response_headers = [('Content-type', 'text/html')]
         start_response(status, response_headers)
         return [response]
+
     elif environ['REQUEST_METHOD'] == 'POST':
-        # Manejar solicitudes POST para insertar, eliminar o actualizar datos
-        post_data = parse_post_data(environ)
+
+        # Continuar con el manejo de solicitudes POST para insertar, eliminar o actualizar datos
         if post_data:
             if 'id' in post_data:
                 nadador_id = int(post_data['id'])
@@ -51,10 +52,12 @@ def handle_crud(environ, start_response):
                     update_nadador(post_data)  # Llama a la función para actualizar el registro
             else:
                 insert_nadador(post_data)  # Llama a la función para insertar el registro
+
             # Redirigir al usuario a la página principal después de la acción
             return redirect_to_main(environ, start_response)
-    else:
-        return handle_404(environ, start_response)
+
+        else:
+            return handle_404(environ, start_response)
 
     
 
@@ -105,7 +108,6 @@ def handle_ranking(environ, start_response):
         start_response(status, response_headers)
         return [response]
 
-    # Mostrar las opciones del selector PRUEBAS para las solicitudes GET
 
 
 def handle_about(environ, start_response):
@@ -124,7 +126,6 @@ def handle_envivo(environ, start_response):
     response_headers = [('Content-type', 'text/html')]
     start_response(status, response_headers)
     return [response]
-
 
 def handle_404(environ, start_response):
     # Lógica para manejar una ruta no reconocida (404)
