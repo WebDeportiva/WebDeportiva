@@ -248,6 +248,7 @@ form {
  
   width: 500px;
   margin: 0 auto;
+
 }
 
 h1 {
@@ -272,6 +273,7 @@ label {
 
 input, select {
   width: 100%;
+  margin-bottom: 5px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -348,7 +350,7 @@ button:hover {
 /* Estilos para la columna izquierda (imagen) */
 .left-column {
   flex: 1; /* Toma el espacio disponible restante */
-  padding: 20px;
+  padding: 5px;
 }
 
 .left-column img {
@@ -358,7 +360,7 @@ button:hover {
 /* Estilos para la columna derecha (texto) */
 .right-column {
   flex: 2; /* Toma el doble de espacio que la columna izquierda */
-  padding: 20px;
+  padding: 5px;
 }
 
 /* Estilos para el contenedor de historia (banner y contenido) */
@@ -369,15 +371,24 @@ button:hover {
   padding: 20px;
   border-radius: 10px;
 }
-
+.historia-columna{
+  flex:1;
+  width: 120px;
+  margin-right: 20px;
+}
 /* Estilos para el banner */
 .historia-banner {
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
 }
 
 /* Estilos para el contenido de la historia */
 .historia-contenido {
   flex: 2;
+  text-align: justify;
 }
 
 /* Estilos para los títulos */
@@ -406,7 +417,7 @@ button:hover {
 }
 
 .imagen-columna img {
-  width: 120px; /* Ancho de las imágenes */
+  width: 90px; /* Ancho de las imágenes */
   height: auto;
   margin: 5px;
   border: 2px solid #0078d4;

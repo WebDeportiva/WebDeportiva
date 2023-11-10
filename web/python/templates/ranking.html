@@ -44,6 +44,7 @@
         </select>
         <button type="submit">Consultar</button>
     </form>
+
     <div id="ranking">
         <table>
             <thead>
@@ -52,7 +53,7 @@
                 <th>Prueba</th>
                 <th>Tiempo (Min)</th>
             </thead>
-            {% if resultados_json%}
+            {% if resultados_json %}
             {% for i in resultados_json %}
             <tr>
                 <td>{{ i['nombre_competicion'] }}</td>

@@ -27,8 +27,7 @@ def cambiar_tabla(data):
     dataComp=dataComp.replace('+',' ')
     dataPrueb=dataPrueb.replace('+',' ')
 
-    # dataComp = dataComp.
-    # dataPrueb = dataPrueb.
+
 
     data['competiciones']=dataComp
     data['pruebas'] = dataPrueb
@@ -64,8 +63,8 @@ def cambiar_tabla(data):
                 'prueba': resultado[3],
                 'resultado': str(resultado[4])
             })
-            
-        return json.dumps(resultados_json)
+        print(type(resultados_json))
+        return resultados_json
 
     except Exception as e:
         print("Error al obtener los datos de la tabla 'resultados':", e)
@@ -161,7 +160,7 @@ def insert_nadador(data):
     try:
         # Ejecutar una consulta SQL de inserción utilizando los datos proporcionados
         query = "INSERT INTO nadadores (dni, nombre, apellido,genero) VALUES (%s, %s, %s, %s)"
-        db_cursor.execute(query, (data['dni'], data['nombre'].encode('utf-8'), data['apellido'].encode('utf-8'), data['genero'])).decode('utf-8')
+        db_cursor.execute(query, (data['dni'], data['nombre'], data['apellido'], data['genero']))
         # Confirmar la transacción
         db_connection.commit()
     except Exception as e:
