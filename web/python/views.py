@@ -19,6 +19,7 @@ def serve_static(environ, start_response):
     #css_path = 'e:/Proyectos_Python/Ej_mvc/static/style.css'
     js_path = static_dir + '\js\script.js'
     main_js_path = static_dir + '\js\script_main.js'
+    envivo_js_path = static_dir + '\js\script_envivo.js'
     css_path = static_dir +'\css\style.css'
 
     #DIRECTORIO DEL MAIN_CSS
@@ -60,6 +61,15 @@ def serve_static(environ, start_response):
         if path.endswith('script.js'):
             try:
                 with open(js_path, 'rb') as file:
+                    jsFile = file.read()
+                    start_response('200 OK', [('Content-type', 'application/js')]) 
+                    return [jsFile]      
+            except Exception as e:
+                start_response('500 Internal Server Error', [('Content-type', 'text/plain')])
+                return [str(e).encode('utf-8')]
+        elif path.endswith('envivo.js'):
+            try:
+                with open(envivo_js_path, 'rb') as file:
                     jsFile = file.read()
                     start_response('200 OK', [('Content-type', 'application/js')]) 
                     return [jsFile]      

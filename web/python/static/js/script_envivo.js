@@ -151,6 +151,6 @@ document.addEventListener('DOMContentLoaded', function() {
         var contadorElement = document.getElementById('contadorCambioPrueba');
         var minutos = Math.floor(tiempoCambioPrueba / 60);
         var segundos = tiempoCambioPrueba % 60;
-        contadorElement.textContent = 'Próximo cambio de prueba en: ' + minutos + ' minutos ' + segundos + ' segundos';
+        contadorElement.textContent = 'Próxima prueba en: ' + minutos + ' minutos ' + segundos + ' segundos';
     }
 });
