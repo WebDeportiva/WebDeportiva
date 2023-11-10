@@ -78,13 +78,27 @@ def handle_main(environ, start_response):
     return [response]
 
 def handle_ranking(environ, start_response):
+    
     template = env.get_template('ranking.html')
+    pruebas = show_selections()
+    competiciones = show_selections2()
 
-    if environ['REQUEST_METHOD'] == 'POST':
+
+    if environ['REQUEST_METHOD'] == 'GET':
+        
+        response = template.render(pruebas=pruebas, competiciones=competiciones).encode('utf-8')
+        status = '200 OK'
+        response_headers = [('Content-type', 'text/html')]
+        start_response(status, response_headers)
+        return [response]
+
+
+    elif environ['REQUEST_METHOD'] == 'POST':
+        
         post_data = parse_post_data(environ)
         print(post_data)
         resultados_json = cambiar_tabla(post_data)
-        response = template.render(resultados_json=resultados_json).encode('utf-8')
+        response = template.render(pruebas=pruebas, competiciones= competiciones,  resultados_json=resultados_json).encode('utf-8')
         print(resultados_json)
         status = '200 OK'
         response_headers = [('Content-type', 'text/html')]
@@ -92,14 +106,7 @@ def handle_ranking(environ, start_response):
         return [response]
 
     # Mostrar las opciones del selector PRUEBAS para las solicitudes GET
-    pruebas = show_selections()
-    competiciones = show_selections2()
 
-    response = template.render(pruebas=pruebas, competiciones=competiciones).encode('utf-8')
-    status = '200 OK'
-    response_headers = [('Content-type', 'text/html')]
-    start_response(status, response_headers)
-    return [response]
 
 def handle_about(environ, start_response):
     template = env.get_template('about_us.html')

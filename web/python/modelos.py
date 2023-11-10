@@ -1,5 +1,5 @@
 import psycopg2
-import json
+from views import url_decode
 
 
 def connect_to_database():
@@ -20,8 +20,8 @@ def connect_to_database():
 #CAMBIAR DATOS DE LA TABLA:
 
 def cambiar_tabla(data):
-    dataComp = data['competiciones']
-    dataPrueb = data['pruebas']
+    dataComp = url_decode(data['competiciones'])
+    dataPrueb = url_decode(data['pruebas'])
 
 
     dataComp=dataComp.replace('+',' ')
@@ -159,9 +159,14 @@ def insert_nadador(data):
     db_cursor = db_connection.cursor()
     try:
         # Ejecutar una consulta SQL de inserción utilizando los datos proporcionados
+        data['nombre'] = url_decode(data['nombre'])
+        data['apellido'] = url_decode(data['apellido'])
+
         query = "INSERT INTO nadadores (dni, nombre, apellido,genero) VALUES (%s, %s, %s, %s)"
         db_cursor.execute(query, (data['dni'], data['nombre'], data['apellido'], data['genero']))
         # Confirmar la transacción
+        
+        
         db_connection.commit()
     except Exception as e:
         print("Error al insertar el registro:", e)

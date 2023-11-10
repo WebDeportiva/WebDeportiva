@@ -57,10 +57,10 @@
             {% if resultados_json %}
             {% for i in resultados_json %}
             <tr>
-                <td>{{ i['nombre_competicion'] }}</td>
-                <td>{{ i['nombre_nadador'] }}</td>
+                <td>{{ i['nombre_competicion']|url_decode }}</td>
+                <td>{{ i['nombre_nadador']|url_decode }}</td>
                 <td>{{ i['prueba'] }}</td>
-                <td>{{ i['resultado'] }}</td>
+                <td>{{ i['resultado']}}</td>
             </tr>
             {% endfor %}
             {% else %}
