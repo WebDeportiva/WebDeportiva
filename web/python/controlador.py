@@ -24,7 +24,8 @@ def app(environ, start_response):
         return serve_static(environ, start_response)
     elif path.startswith('/crud'):
         return handle_crud(environ, start_response)
-        
+    elif path.startswith('/envivo'):
+        return handle_envivo(environ, start_response)    
     else:
         return handle_404(environ, start_response)
 
@@ -107,6 +108,16 @@ def handle_about(environ, start_response):
     response_headers = [('Content-type', 'text/html')]
     start_response(status, response_headers)
     return [response]
+
+
+def handle_envivo(environ, start_response):
+    template = env.get_template('envivo.html')
+    response = template.render().encode('utf-8')
+    status = '200 OK'
+    response_headers = [('Content-type', 'text/html')]
+    start_response(status, response_headers)
+    return [response]
+
 
 def handle_404(environ, start_response):
     # Lógica para manejar una ruta no reconocida (404)
